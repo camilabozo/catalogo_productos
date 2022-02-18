@@ -15,6 +15,7 @@ class UsuarioController extends AbstractController
     public function getUsuario(ManagerRegistry $doctrine)
     {
         $usuario = $doctrine->getRepository(Usuario::class)->find(1);
+        dd($usuario);
         return $this->render('home.html.twig', ['usuario' => $usuario]);
     }
 }

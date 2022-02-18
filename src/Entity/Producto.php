@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Producto
  *
- * @ORM\Table(name="producto", indexes={@ORM\Index(name="usuario_id", columns={"usuario_id"})})
+ * @ORM\Table(name="producto", indexes={@ORM\Index(name="usuario_id", columns={"usuario_carga"}), @ORM\Index(name="categoria_id", columns={"categoria_id"})})
  * @ORM\Entity
  */
 class Producto
@@ -43,11 +43,11 @@ class Producto
     private $precio;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="imagen", type="blob", length=65535, nullable=false)
+     * @ORM\Column(name="imagen", type="blob", length=65535, nullable=true, options={"default"="NULL"})
      */
-    private $imagen;
+    private $imagen = 'NULL';
 
     /**
      * @var \DateTime
@@ -68,99 +68,30 @@ class Producto
      *
      * @ORM\ManyToOne(targetEntity="Usuario")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="usuario_carga", referencedColumnName="id")
      * })
      */
-    private $usuario;
+    private $usuarioCarga;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @var \Categoria
+     *
+     * @ORM\ManyToOne(targetEntity="Categoria")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * })
+     */
+    private $categoria;
 
-    public function getNombre(): ?string
-    {
-        return $this->nombre;
-    }
 
-    public function setNombre(string $nombre): self
-    {
+    public function __construct($categoria, $nombre, $descripcion, $precio, $imagen, $usuario){
+        $this->categoria = $categoria;
         $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    public function getDescripcion(): ?string
-    {
-        return $this->descripcion;
-    }
-
-    public function setDescripcion(string $descripcion): self
-    {
         $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    public function getPrecio(): ?int
-    {
-        return $this->precio;
-    }
-
-    public function setPrecio(int $precio): self
-    {
         $this->precio = $precio;
-
-        return $this;
-    }
-
-    public function getImagen()
-    {
-        return $this->imagen;
-    }
-
-    public function setImagen($imagen): self
-    {
         $this->imagen = $imagen;
-
-        return $this;
+        $this->fechaPublicacion = new \DateTime();
+        $this->estado = "Pendiente";
+        $this->usuarioCarga = $usuario;
     }
-
-    public function getFechaPublicacion(): ?\DateTimeInterface
-    {
-        return $this->fechaPublicacion;
-    }
-
-    public function setFechaPublicacion(\DateTimeInterface $fechaPublicacion): self
-    {
-        $this->fechaPublicacion = $fechaPublicacion;
-
-        return $this;
-    }
-
-    public function getEstado(): ?string
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(string $estado): self
-    {
-        $this->estado = $estado;
-
-        return $this;
-    }
-
-    public function getUsuario(): ?Usuario
-    {
-        return $this->usuario;
-    }
-
-    public function setUsuario(?Usuario $usuario): self
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-
 }

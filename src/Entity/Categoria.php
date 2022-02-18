@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Usuario
+ * Categoria
  *
- * @ORM\Table(name="usuario")
+ * @ORM\Table(name="categoria")
  * @ORM\Entity
  */
-class Usuario
+class Categoria
 {
     /**
      * @var int
@@ -28,12 +28,12 @@ class Usuario
      */
     private $nombre;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
+    public function getId(){
+        return $this->id;
+    }
 
+    public function getNombre(){
+        return $this->nombre;
+    }
 
 }

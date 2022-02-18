@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <form action="{{ path('guardarProducto') }}" method="POST">
+            <label for="">Categoria</label>
+            <select name="categoria" id="categoria">
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="">Nombre del producto</label>
+            <input name="nombre" type="text">
+
+            <label for="">Descripción</label>
+            <input name="descripcion" type="text">
+
+            <label for="">Precio</label>
+            <input name="precio" type="number">
+
+            <label for="">Imágen del producto</label>
+            <input name="imagen" type="file" value="Seleccionar Imagen">
+
+            <button  type="submit">Guardar Producto</button>
+        </form>
+    </main>
+    {% block page_contents %}{% endblock %}
+{% endblock %}

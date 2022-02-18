@@ -1,3 +1,39 @@
-body {
-    background-color: lightgray;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+img{
+    width: 200px;
+    height: auto;
+}
+
+.cards__container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__container{
+    background-color: peachpuff;
+    width: 300px;
+    height: 400px;
+}
+
+.title_font{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.font {
+    font-family: 'Raleway', sans-serif;
+}
+
+.product_title_font{
+    font-weight: 900;
+}
+
+.product_info_font{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
 }

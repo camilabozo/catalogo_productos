@@ -64,9 +64,9 @@ class Producto
     private $estado;
 
     /**
-     * @var \Usuario
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuario_carga", referencedColumnName="id")
      * })
@@ -83,15 +83,106 @@ class Producto
      */
     private $categoria;
 
-
-    public function __construct($categoria, $nombre, $descripcion, $precio, $imagen, $usuario){
-        $this->categoria = $categoria;
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->precio = $precio;
-        $this->imagen = $imagen;
-        $this->fechaPublicacion = new \DateTime();
-        $this->estado = "Pendiente";
-        $this->usuarioCarga = $usuario;
+    public function getId(): ?int
+    {
+        return $this->id;
     }
+
+    public function getNombre(): ?string
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre(string $nombre): self
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getPrecio(): ?int
+    {
+        return $this->precio;
+    }
+
+    public function setPrecio(int $precio): self
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen($imagen): self
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    public function getFechaPublicacion(): ?\DateTimeInterface
+    {
+        return $this->fechaPublicacion;
+    }
+
+    public function setFechaPublicacion(\DateTimeInterface $fechaPublicacion): self
+    {
+        $this->fechaPublicacion = $fechaPublicacion;
+
+        return $this;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado): self
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    public function getUsuarioCarga(): ?User
+    {
+        return $this->usuarioCarga;
+    }
+
+    public function setUsuarioCarga(?User $usuarioCarga): self
+    {
+        $this->usuarioCarga = $usuarioCarga;
+
+        return $this;
+    }
+
+    public function getCategoria(): ?Categoria
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(?Categoria $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+
 }

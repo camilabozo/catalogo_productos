@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <navbar class="flex justify-end">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </navbar>
+
+    <header class="mb-16">
+        <h1 class="text-center text-5xl title_font">Gestionar Productos</h1>
+    </header>
+
+    <main>
+        <a href="{{ path('crearProducto') }}" class="self-end">Cargar producto</a>
+        <section>
+            <h2>Productos publicados</h2>
+            <table>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>
+                            <a href="#" class="self-end">Despublicar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </section>
+<br><br><br><br><br>
+        <section>
+            <h2>Productos pendientes</h2>
+            <table>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>
+                            <a href="#" class="self-end">Publicar</a>
+                            <a href="#" class="self-end">Editar</a>
+                            <a href="#" class="self-end">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </section>
+    </main>
+    {% block page_contents %}{% endblock %}
+{% endblock %}

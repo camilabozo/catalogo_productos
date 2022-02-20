@@ -28,12 +28,22 @@ class Categoria
      */
     private $nombre;
 
-    public function getId(){
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
-    public function getNombre(){
+    public function getNombre(): ?string
+    {
         return $this->nombre;
     }
+
+    public function setNombre(string $nombre): self
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
 
 }

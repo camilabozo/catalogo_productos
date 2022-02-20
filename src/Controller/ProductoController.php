@@ -4,66 +4,66 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Producto;
-use App\Entity\Categoria;
-use App\Entity\Usuario;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Entity\Producto;
+use App\Entity\Categoria;
+use App\Entity\User;
 
 /**
-* @Route("/productos")
-*/
-
+ * @Route("/gestion/productos")
+ * @IsGranted("ROLE_ADMIN")
+ */
 class ProductoController extends AbstractController
 {
     /**
-    * @Route("/listar", name="listarProductos")
+    * @Route("/", name="gestionarProductos")
     */
-    public function listProductos(ManagerRegistry $doctrine)
+    public function gestionarProductos(ManagerRegistry $doctrine)
     {
         $productos = $doctrine->getRepository(Producto::class)->findAll();
-        return $this->render('home.html.twig', ['productos' => $productos]);
+        return $this->render('/producto/gestionarProductos.html.twig', ['productos' => $productos]);
     }
 
     /**
-    * @Route("/producto/{id}", name="producto")
+    * @Route("/producto/nuevo", name="crearProducto")
+    * @IsGranted("ROLE_ADMIN")
     */
-    public function detailProducto(ManagerRegistry $doctrine, $id)
-    {
-        $producto = $doctrine->getRepository(Producto::class)->find($id);
-        return $this->render('productoDetalle.html.twig', ['producto' => $producto]);
-    }
-
-    /**
-    * @Route("/nuevo", name="nuevoProducto")
-    */
-    public function agregarProducto(ManagerRegistry $doctrine)
+    public function crearProducto(ManagerRegistry $doctrine)
     {
         $categorias = $doctrine->getRepository(Categoria::class)->findAll();
-        return $this->render('agregarProducto.html.twig', ['categorias' => $categorias]);
+        return $this->render('producto/crearProducto.html.twig', ['categorias' => $categorias]);
     }
 
     /**
-    * @Route("/guardar", name="guardarProducto")
-     * @Method({"POST"})
+    * @Route("/producto/guardar", name="guardarProducto")
+    * @Method({"POST"})
     */
     public function guardarProducto(ManagerRegistry $doctrine, Request $request)
     {
         $entityManager = $doctrine->getManager();
         $categoria_id = $request->request->get("categoria");
-        $nombre = $request->request->get("nombre");
+        $username = $request->request->get("username");
         $descripcion = $request->request->get("descripcion");
         $precio = $request->request->get("precio");
         $imagen = $request->request->get("imagen");
         $categoria = $doctrine->getRepository(Categoria::class)->find($categoria_id);
-        $usuario = $doctrine->getRepository(Usuario::class)->find(1);
+        $usuario = $doctrine->getRepository(User::class)->find(1);
 
-        $producto = new Producto($categoria, $nombre, $descripcion, $precio, $imagen, $usuario);
+        $producto = new Producto($categoria, $username, $descripcion, $precio, $imagen, $usuario);
 
         $entityManager->persist($producto);
         $entityManager->flush();
-        $categorias = $doctrine->getRepository(Categoria::class)->findAll();
-
-        return $this->render('agregarProducto.html.twig', ['categorias' => $categorias]);
+        return $this->redirectToRoute('crearProducto');
     }
+
+    // /**
+    // * @Route("/producto/{id}", name="detalleProducto")
+    // */
+    // public function detallarProducto(ManagerRegistry $doctrine, $id)
+    // {
+    //     $producto = $doctrine->getRepository(Producto::class)->find($id);
+    //     return $this->render('producto/detallarProducto.html.twig', ['producto' => $producto]);
+    // }
 }

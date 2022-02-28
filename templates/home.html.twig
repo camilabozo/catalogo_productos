@@ -1,37 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
-    <nav class="navbar__container">
-        <section class="logo__container">
-            <img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML">
-        </section>
+
+    <nav class="nav">
+        <input type="checkbox" id="nav__checkbox" class="nav__checkbox">
+        <label for="nav__checkbox" class="nav__toggle">
+            <i class="material-icons menu">menu</i>
+            <i class="material-icons close">close</i>
+        </label>
+        <a href="#"><img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML"></a>
+        <i class="material-icons menu">search</i>
         <section class="list__container">
-            <ul class="list">
-                <li><a href="#">Quiénes somos</a></li>
-                <li><a href="#">Métodos de pago</a></li>
-                <li><a href="#">Cómo trabajamos</a></li>
-                <li><a href="#">Mayorista</a></li>
-                <li><a href="#">Envíos</a></li>
-                <li><a href="#">Contacto</a></li>
+            <ul class="nav__menu">
+                <li class="nav_menu__item"><a href="#">¿Quiénes somos?</a></li>
+                <li class="nav_menu__item"><a href="#">Métodos de pago</a></li>
+                <li class="nav_menu__item"><a href="#">¿Cómo trabajamos?</a></li>
+                <li class="nav_menu__item"><a href="#">Mayorista</a></li>
+                <li class="nav_menu__item"><a href="#">Envíos</a></li>
+                <li class="nav_menu__item"><a href="#">Contacto</a></li>
             </ul>
         </section>
     </nav>
 
-    <header class="">
-        <h1 class="">Productos</h1>
+    <!-- <section class="hamburger_menu__container"> </section> -->
+
+    <header class="header__container">
+        <h1 class="title">Productos disponibles</h1>
     </header>
 
-    <main class="">
-        <section class="">
+    <main class="main__container">
+        <section class="products__container">
             {% for producto in productos %}
-                <section class="">
+                <section class="product__container">
                     <img class="product__img" src="{{ asset('build/images/ring.jpg') }}" alt="Anillo">
-                    <section>
-                        <h4 class=""> {{ producto.nombre }} </h4>
-                        <p class=""> {{ producto.descripcion }} </p>
-                        <h4 class=""> ${{ producto.precio }} </h4>
-                        <a href="{{ path('detalleProducto', {'id': producto.id }) }}" class="self-end">Más información</a>
+                    <section class="product_info__container">
+                        <h4 class="product__name"> {{ producto.nombre }} </h4>
+                        <p class="product__description"> {{ producto.descripcion | u.truncate(100, '...') }} </p>
+                        <h4 class="product__price"> ${{ producto.precio }} </h4>
+                        <a href="{{ path('detalleProducto', {'id': producto.id }) }}" class="info__btn">Más información</a>
                     </section>
                 </section>
             {% endfor %}

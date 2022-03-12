@@ -75,10 +75,22 @@ li a{
     box-shadow: 0 1px 0 0 #000;
 }
 
-.logo__img{
-    width: 70px;
-    height: auto;
+.nav_elements__container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 60px;
+    /* align-items: center; */
 }
+
+.logo_img__container, .logo__img{
+    width: 70px;
+    height: 70px;
+}
+
+/* .logo_img__container {
+    justify-self: center;
+} */
 
 .material-icons {
     color: white;

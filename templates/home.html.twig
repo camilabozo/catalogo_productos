@@ -2,22 +2,22 @@
 
 {% block body %}
 
-    <nav>
-        <div class="nav_sub__container nav-wrapper nav">
-          <section class="nav_elements__container">
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <a href="#" class="logo_img__container"><img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML"></a>
-          </section>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">¿Quiénes somos?</a></li>
-                <li><a href="#">Métodos de pago</a></li>
-                <li><a href="#">¿Cómo trabajamos?</a></li>
-                <li><a href="#">Mayorista</a></li>
-                <li><a href="#">Envíos</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
+  <nav>
+      <div class="nav_sub__container nav-wrapper nav">
+        <section class="nav_elements__container">
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <a href="#" class="logo_img__container"><img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML"></a>
+        </section>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">¿Quiénes somos?</a></li>
+            <li><a href="#">Métodos de pago</a></li>
+            <li><a href="#">¿Cómo trabajamos?</a></li>
+            <li><a href="#">Mayorista</a></li>
+            <li><a href="#">Envíos</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+  </nav>
 
   <ul class="sidenav" id="mobile-demo">
     <li><a href="#">¿Quiénes somos?</a></li>
@@ -27,32 +27,11 @@
     <li><a href="#">Envíos</a></li>
     <li><a href="#">Contacto</a></li>
   </ul>
-{# 
-    <nav class="nav">
-        <input type="checkbox" id="nav__checkbox" class="nav__checkbox">
-        <label for="nav__checkbox" class="nav__toggle">
-            <i class="material-icons menu">menu</i>
-            <i class="material-icons close">close</i>
-        </label>
-        <a href="#"><img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML"></a>
-        <i class="material-icons menu">search</i>
-        <section class="list__container">
-            <ul class="nav__menu">
-                <li class="nav_menu__item"><a href="#">¿Quiénes somos?</a></li>
-                <li class="nav_menu__item"><a href="#">Métodos de pago</a></li>
-                <li class="nav_menu__item"><a href="#">¿Cómo trabajamos?</a></li>
-                <li class="nav_menu__item"><a href="#">Mayorista</a></li>
-                <li class="nav_menu__item"><a href="#">Envíos</a></li>
-                <li class="nav_menu__item"><a href="#">Contacto</a></li>
-            </ul>
-        </section>
-    </nav> #}
-
 
     <header class="header__container">
       <section class="search_input__container">
         <i class="material-icons">search</i>
-        <input type="text" id="search__input">
+        <input type="text" id="search__input" placeholder="Buscá con palabras clave">
       </section>
       <h1 class="title">Productos disponibles</h1>
     </header>

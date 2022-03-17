@@ -236,6 +236,22 @@ li.nav_menu__item{
     align-self: flex-end;
 }
 
+.product_detail__img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 13px;
+}
+
+.product_detail__container {
+    width: 90%;
+    height: auto;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
 .info__btn {
     font-family: var(--poppins);
     color: white;
@@ -248,6 +264,23 @@ li.nav_menu__item{
     padding: 8px 19px;
     text-decoration: none;
     text-align: center;
+}
+
+.breadcrumb__container {
+    margin: 32px 0 35px 0;
+}
+
+.breadcrumb, .breadcrumb:last-child {
+    font-size: 1.3rem;
+    font-family: var(--raleway);
+    font-weight: 400;
+    line-height: 2.1rem;
+    color: var(--azul-intenso);
+}
+
+.breadcrumb:before {
+    color: var(--azul-intenso);
+    margin: 0;
 }
 
 /* Desktop view */

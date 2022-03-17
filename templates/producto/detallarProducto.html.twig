@@ -1,13 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <main class="flex justify-center">
-        <section class="flex flex-col bg-indigo-400 w-56 p-2.5 rounded-2xl">
-            <img class="w-48 h-auto rounded-2xl" src="{{ asset('build/images/ring.jpg') }}" alt="Anillo">
-            <section>
-                <h4 class="text-xl font product_title_font"> {{ producto.nombre }} </h4>
-                <p class="font product_info_font"> {{ producto.descripcion }} </p>
-                <h4 class="font product_info_font text-right"> ${{ producto.precio }} </h4>
+
+    <nav>
+        <div class="nav_sub__container nav-wrapper nav">
+            <section class="nav_elements__container">
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" class="logo_img__container"><img class="logo__img" src="{{ asset('build/images/logo.svg') }}" alt="AML"></a>
+            </section>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">¿Quiénes somos?</a></li>
+                <li><a href="#">Métodos de pago</a></li>
+                <li><a href="#">¿Cómo trabajamos?</a></li>
+                <li><a href="#">Mayorista</a></li>
+                <li><a href="#">Envíos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header__container">
+      <section class="search_input__container">
+        <i class="material-icons">search</i>
+        <input type="text" id="search__input" placeholder="Buscá con palabras clave">
+      </section>
+      <div class="col s12 breadcrumb__container">
+        <a href="#!" class="breadcrumb">Acero Quirurgico</a>
+        <a href="#!" class="breadcrumb">Cadenas</a>
+      </div>
+    </header>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#">¿Quiénes somos?</a></li>
+        <li><a href="#">Métodos de pago</a></li>
+        <li><a href="#">¿Cómo trabajamos?</a></li>
+        <li><a href="#">Mayorista</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+
+    <main>
+        <section class="product_detail__container">
+            <img class="product_detail__img" src="{{ asset('build/images/ring.jpg') }}" alt="Anillo">
+            <section class="product_info__container">
+                <h4 class="product__name"> {{ producto.nombre }} </h4>
+                <p class="product__description"> {{ producto.descripcion }} </p>
+                <h4 class="product__price"> ${{ producto.precio }} </h4>
             </section>
         </section>
     </main>

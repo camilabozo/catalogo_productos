@@ -28,14 +28,14 @@
                     <th>Categoría</th>
                     <th>Acciones</th>
                 </tr>
-                {% for producto in productos %}
+                {% for producto in productosPublicados %}
                     <tr>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>
-                            <a href="#" class="self-end">Despublicar</a>
+                            <a href="{{ path('cambiarEstado', {'id': producto.id, 'estado': 'PENDIENTE' }) }}" class="self-end">Despublicar</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -52,16 +52,16 @@
                     <th>Categoría</th>
                     <th>Acciones</th>
                 </tr>
-                {% for producto in productos %}
+                {% for producto in productosPendientes %}
                     <tr>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>
-                            <a href="#" class="self-end">Publicar</a>
+                            <a href="{{ path('cambiarEstado', {'id': producto.id, 'estado': 'PUBLICADO' }) }}" class="self-end">Publicar</a>
                             <a href="#" class="self-end">Editar</a>
-                            <a href="#" class="self-end">Eliminar</a>
+                            <a href="{{ path('eliminarProducto', {'id': producto.id}) }}" class="self-end">Eliminar</a>
                         </td>
                     </tr>
                 {% endfor %}

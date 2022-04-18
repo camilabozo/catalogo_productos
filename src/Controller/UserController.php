@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\User;
-use App\Entity\Categoria;
+// use App\Entity\Categoria;
 
 class UserController extends AbstractController
 {   

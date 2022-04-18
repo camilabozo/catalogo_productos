@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Producto;
 use App\Entity\Categoria;
-use App\Entity\User;
 
 /**
  * @Route("/gestion/productos")
@@ -19,15 +18,19 @@ class ProductoController extends AbstractController
 {
     /**
     * @Route("/", name="gestionarProductos")
+    * @Method({"GET"})
     */
     public function gestionarProductos(ManagerRegistry $doctrine)
     {
-        $productos = $doctrine->getRepository(Producto::class)->findAll();
-        return $this->render('/producto/gestionarProductos.html.twig', ['productos' => $productos]);
+        $productosPublicados = $doctrine->getRepository(Producto::class)->findBy(['estado' => 'PUBLICADO']);
+        $productosPendientes = $doctrine->getRepository(Producto::class)->findBy(['estado' => 'PENDIENTE']);
+        return $this->render('/producto/gestionarProductos.html.twig', ['productosPublicados' => $productosPublicados, 
+                                                                        'productosPendientes' => $productosPendientes]);
     }
 
     /**
-    * @Route("/producto/nuevo", name="crearProducto")
+    * @Route("/nuevo", name="crearProducto")
+    * @Method({"GET"})
     * @IsGranted("ROLE_ADMIN")
     */
     public function crearProducto(ManagerRegistry $doctrine)
@@ -37,33 +40,63 @@ class ProductoController extends AbstractController
     }
 
     /**
-    * @Route("/producto/guardar", name="guardarProducto")
+    * @Route("/guardar", name="guardarProducto")
     * @Method({"POST"})
     */
     public function guardarProducto(ManagerRegistry $doctrine, Request $request)
     {
         $entityManager = $doctrine->getManager();
         $categoria_id = $request->request->get("categoria");
-        $username = $request->request->get("username");
+        $nombre = $request->request->get("nombre");
         $descripcion = $request->request->get("descripcion");
         $precio = $request->request->get("precio");
         $imagen = $request->request->get("imagen");
         $categoria = $doctrine->getRepository(Categoria::class)->find($categoria_id);
-        $usuario = $doctrine->getRepository(User::class)->find(1);
 
-        $producto = new Producto($categoria, $username, $descripcion, $precio, $imagen, $usuario);
+        $usuario =  1; // $doctrine->getRepository(User::class)->find(1);//
+
+        $producto = new Producto($categoria, $nombre, $descripcion, $precio, $imagen, $usuario);
 
         $entityManager->persist($producto);
         $entityManager->flush();
         return $this->redirectToRoute('crearProducto');
     }
 
-    // /**
-    // * @Route("/producto/{id}", name="detalleProducto")
-    // */
-    // public function detallarProducto(ManagerRegistry $doctrine, $id)
+    /**
+    * @Route("/{id}", name="vistaPrevia")
+    * @Method({"GET"})
+    */
+    // public function vistaPrevia(ManagerRegistry $doctrine, $id)
     // {
     //     $producto = $doctrine->getRepository(Producto::class)->find($id);
-    //     return $this->render('producto/detallarProducto.html.twig', ['producto' => $producto]);
+    //     return $this->render('producto/vistaPrevia.html.twig', ['producto' => $producto]);
     // }
+
+     /**
+     * @Route("/{id}", name="eliminarProducto")
+     * @Method({"DELETE"})
+     *
+     */
+    public function eliminarProducto(ManagerRegistry $doctrine, Producto $producto)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($producto);
+        $entityManager->flush();
+        return $this->redirectToRoute('gestionarProductos');
+    }
+
+    /**
+    * @Route("/{id}/cambiarEstado", name="cambiarEstado")
+    * @Method({"POST"})
+    */
+    public function cambiarEstado(ManagerRegistry $doctrine, Request $request, Producto $producto)
+    {
+        $entityManager = $doctrine->getManager();
+        $estado = $request->query->get('estado');
+        $producto->setEstado($estado);
+
+        $entityManager->persist($producto);
+        $entityManager->flush();
+        return $this->redirectToRoute('gestionarProductos');
+    }
 }

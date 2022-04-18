@@ -4,7 +4,7 @@
     <main>
         <form action="{{ path('guardarProducto') }}" method="POST">
             <label for="">Categoria</label>
-            <select name="categoria" id="categoria">
+            <select name="categoria" id="categoria" class="browser-default">
                 {% for categoria in categorias %}
                     <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
                 {% endfor %}

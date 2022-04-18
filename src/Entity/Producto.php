@@ -83,6 +83,18 @@ class Producto
      */
     private $categoria;
 
+    public function __construct($categoria, $nombre, $descripcion, $precio, $imagen, $usuario)
+    {        
+        $this->categoria = $categoria;
+        $this->nombre = $nombre;
+        $this->descripcion = $descripcion;
+        $this->precio = $precio;
+        $this->imagen = $imagen;
+        $this->usuario = $usuario;
+        $this->fechaPublicacion = new \DateTime();
+        $this->estado = "PENDIENTE";
+    }
+
     public function getId(): ?int
     {
         return $this->id;
